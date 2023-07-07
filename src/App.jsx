@@ -56,7 +56,7 @@ function App() {
       const allowedNetworks = [97, 56]; // Array of allowed network chainIds
   
       if (!allowedNetworks.includes(network.chainId)) {
-        setErrorMessage("Please disconnect and switch to the Binance Smart Chain Testnet or Mainnet to claim the airdrop.");
+        setErrorMessage("Please disconnect and switch to the Binance Testnet to claim the airdrop.");
         return;
       }
   
@@ -100,7 +100,7 @@ function App() {
       window.location.reload(); // Reload the page
     } catch (error) {
       console.error(error);
-      setErrorMessage("Failed to switch network. Please switch EVM chain to BSC in your Trustwallet.");
+      setErrorMessage("Failed to switch network. Please switch EVM Network to BSC in your Trustwallet.");
     }
   };
 
@@ -135,7 +135,7 @@ function App() {
       )}
       {!isConnected && (
         <div style={styles.networkInfo}>
-          <p style={styles.message}>Please switch to the Binance Smart Chain Testnet network to use this application.</p>
+          <p style={styles.message}>Connect to Binance S Testnet network to use this application.</p>
           <button style={styles.switchButton} onClick={switchNetwork}>Switch Network</button>
         </div>
       )}
