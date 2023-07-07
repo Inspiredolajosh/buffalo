@@ -104,6 +104,10 @@ function App() {
     }
   };
 
+  const closeErrorMessage = () => {
+    setErrorMessage(null);
+  };
+
   return (
     <>
       <NavBar
@@ -119,7 +123,14 @@ function App() {
       )}
       {errorMessage && (
         <div style={styles.notification}>
-          {errorMessage}
+          <span>{errorMessage}</span>
+          <button
+            className="close-button"
+            style={styles.closeButton}
+            onClick={closeErrorMessage}
+          >
+            X
+          </button>
         </div>
       )}
       {!isConnected && (
@@ -152,6 +163,20 @@ const styles = {
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
     fontFamily: "Arial, sans-serif",
     fontSize: "15px",
+  },
+  closeButton: {
+    marginLeft: "10px",
+    backgroundColor: "#333",
+    color: "#fff",
+    border: "none",
+    borderRadius: "50%",
+    width: "20px",
+    height: "20px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: "16px",
+    cursor: "pointer",
   },
   networkInfo: {
     backgroundColor: "#f5f5f5",
