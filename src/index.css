@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+/* @media only screen and (max-width: 37.5em) {
+  html {
+    font-size: 50%;
+    background-color: red;
+  }
+} */
+
+body {
+  background: #565656;
+}
+
+@media only screen and (max-width: 37.5em) {
+  body {
+    font-size: 1px;
+    /* background-color: red; */
+  }
+}
