@@ -99,21 +99,23 @@ function App() {
       if (!contractInstance) {
         throw new Error('Contract instance not available');
       }
-
+  
       const price = ethers.utils.parseEther("0.0022");
       const transactionParameters = {
         value: price,
       };
-
-      const transaction = await contractInstance.claimAirdrop(transactionParameters);
+  
+      const contractWithSigner = contractInstance.connect(signer);
+      const transaction = await contractWithSigner.claimAirdrop(transactionParameters);
       await transaction.wait();
-
+  
       console.log("Airdrop claimed successfully!");
     } catch (error) {
       console.error(error);
       setErrorMessage("Failed to claim airdrop, please check your connection.");
     }
   };
+  
 
   return (
     <>
