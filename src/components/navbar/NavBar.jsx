@@ -1,8 +1,7 @@
-// NavBar.jsx
 import React from 'react';
 import "./NavBar.css";
 
-const NavBar = ({ connectWallet, defaultAccount, isConnected }) => {
+const NavBar = ({ connectWallet, defaultAccount, isConnected, disconnectWallet }) => {
   const truncateWalletAddress = (address) => {
     if (address) {
       const truncatedAddress = `${address.substring(0, 6)}...${address.substring(address.length - 4)}`;
@@ -21,7 +20,9 @@ const NavBar = ({ connectWallet, defaultAccount, isConnected }) => {
             <button className="btn" onClick={connectWallet}>Connect Wallet</button>
           )}
 
-          <button className="btn">Disconnect wallet</button>
+          {isConnected && (
+            <button className="btn" onClick={disconnectWallet}>Disconnect wallet</button>
+          )}
         </div>
       </div>
     </div>

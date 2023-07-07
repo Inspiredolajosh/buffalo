@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./App.css";
 import buffallo from "../src/assets/img/buffallo.png";
-import Navbar from "../src/components/navbar/NavBar.jsx";
+import NavBar from "../src/components/navbar/NavBar.jsx";
 import { ethers } from 'ethers';
 import abi from './Buffalo.json';
 
@@ -37,6 +37,9 @@ function App() {
   };
 
   const disconnectWallet = () => {
+    if (window.ethereum && window.ethereum.selectedAddress) {
+      window.ethereum.selectedAddress = null;
+    }
     setDefaultAccount(null);
     setIsConnected(false);
     setErrorMessage(null);
@@ -49,6 +52,12 @@ function App() {
 
   const claimAirdrop = async () => {
     try {
+      const network = await provider.getNetwork();
+      if (network.chainId !== 97) {
+        setErrorMessage("Please disconnect and switch to the Binance Smart Chain Testnet to claim the airdrop.");
+        return;
+      }
+
       const price = ethers.utils.parseEther("0.0022");
       const transactionParameters = {
         value: price,
@@ -83,15 +92,21 @@ function App() {
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: '0x61' }],
       });
+      window.location.reload(); // Reload the page
     } catch (error) {
       console.error(error);
-      setErrorMessage("Failed to switch network. Please make sure you are using the Binance Smart Chain Testnet.");
+      setErrorMessage("Failed to switch network. Please switch EVM chain to BSC in your Trustwallet.");
     }
   };
 
   return (
     <>
-      <Navbar connectWallet={connectWallet} defaultAccount={defaultAccount} isConnected={isConnected} />
+      <NavBar
+        connectWallet={connectWallet}
+        defaultAccount={defaultAccount}
+        isConnected={isConnected}
+        disconnectWallet={disconnectWallet}
+      />
       {notification && (
         <div style={styles.notification}>
           {notification}
