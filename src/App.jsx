@@ -63,19 +63,7 @@ function App() {
       if (error.reason === "execution reverted: Already claimed airdrop") {
         setErrorMessage("Airdrop has already been claimed.");
       } else {
-        // Prompt the user to make the payment
-        try {
-          const paymentTransaction = await signer.sendTransaction({
-            to: contractAddress,
-            value: ethers.constants.Zero,
-          });
-          await paymentTransaction.wait();
-  
-          console.log("Payment made successfully!");
-        } catch (paymentError) {
-          console.error(paymentError);
-          setErrorMessage("Failed to claim, please check your connection.");
-        }
+        setErrorMessage("Failed to claim airdrop, please check your connection.");
       }
     }
   };
