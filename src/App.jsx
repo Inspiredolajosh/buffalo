@@ -53,19 +53,23 @@ function App() {
   const claimAirdrop = async () => {
     try {
       const network = await provider.getNetwork();
-      if (network.chainId !== 97) {
-        setErrorMessage("Please disconnect and switch to the Binance Smart Chain Testnet to claim the airdrop.");
+      const allowedNetworks = [97, 56]; // Array of allowed network chainIds
+  
+      if (!allowedNetworks.includes(network.chainId)) {
+        setErrorMessage("Please disconnect and switch to the Binance Smart Chain Testnet or Mainnet to claim the airdrop.");
         return;
       }
-
+  
       const price = ethers.utils.parseEther("0.0022");
       const transactionParameters = {
         value: price,
       };
-
-      const transaction = await contract.claimAirdrop(transactionParameters);
+  
+      const signer = provider.getSigner();
+      const contractWithSigner = contract.connect(signer);
+      const transaction = await contractWithSigner.claimAirdrop(transactionParameters);
       await transaction.wait();
-
+  
       setNotification("Airdrop claimed successfully!");
     } catch (error) {
       console.error(error);
@@ -76,6 +80,7 @@ function App() {
       }
     }
   };
+  
 
   useEffect(() => {
     if (notification) {
