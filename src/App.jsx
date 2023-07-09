@@ -56,7 +56,7 @@ function App() {
       const allowedNetworks = [56]; // Array of allowed network chainIds
   
       if (!allowedNetworks.includes(network.chainId)) {
-        setErrorMessage("Please disconnect and switch to the Binance mainnet to claim the airdrop.");
+        setErrorMessage("Please switch to the Binance mainnet to claim the airdrop.");
         return;
       }
   
