@@ -7,7 +7,7 @@ import abi from './Buffalo.json';
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
-const contractAddress = '0xFDAdADaB4e5f5e7050Ce54d79631D381420E0F20'; // Replace with your deployed contract address
+const contractAddress = '0xBEcEDb58216A7E1dBe89c8e48d3Bf14960c6FA1a'; 
 const contract = new ethers.Contract(contractAddress, abi, signer);
 
 function App() {
@@ -53,10 +53,10 @@ function App() {
   const claimAirdrop = async () => {
     try {
       const network = await provider.getNetwork();
-      const allowedNetworks = [97, 56]; // Array of allowed network chainIds
+      const allowedNetworks = [56]; // Array of allowed network chainIds
   
       if (!allowedNetworks.includes(network.chainId)) {
-        setErrorMessage("Please disconnect and switch to the Binance Testnet to claim the airdrop.");
+        setErrorMessage("Please disconnect and switch to the Binance mainnet to claim the airdrop.");
         return;
       }
   
@@ -95,12 +95,12 @@ function App() {
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x61' }],
+        params: [{ chainId: '0x38' }],
       });
-      window.location.reload(); // Reload the page
+      window.location.reload(); 
     } catch (error) {
       console.error(error);
-      setErrorMessage("Failed to switch network. Please switch EVM Network to BSC in your Trustwallet.");
+      setErrorMessage("Failed to switch network. Please switch EVM Network to BSC in your wallet.");
     }
   };
 
@@ -135,7 +135,7 @@ function App() {
       )}
       {!isConnected && (
         <div style={styles.networkInfo}>
-          <p style={styles.message}>Connect to Binance S Testnet network to use this application.</p>
+          <p style={styles.message}>Connect to Binance mainnet to claim airdrop.</p>
           <button style={styles.switchButton} onClick={switchNetwork}>Switch Network</button>
         </div>
       )}
