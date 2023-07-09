@@ -136,7 +136,9 @@ function App() {
       {!isConnected && (
         <div style={styles.networkInfo}>
           <p style={styles.message}>Connect to Binance mainnet to claim airdrop.</p>
-          <button style={styles.switchButton} onClick={switchNetwork}>Switch Network</button>
+          <button style={styles.switchButton} onClick={switchNetwork}>Switch Network to Binance</button>
+          <br />
+          <p style={styles.message}>After switching, connect your wallet and claim.</p>
         </div>
       )}
       <div className="app">
